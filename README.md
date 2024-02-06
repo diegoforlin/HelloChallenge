@@ -79,8 +79,8 @@
             "street": "by the Mountains",  
             "number": "No number",  
             "neighborhood": "Mountain Village",
-            "city": "Mountain Fuji",
-            "state": "Japan"
-        }
-    }	
+            "city": "Mountain Fuji",  
+            "state": "Japan"  
+        }  
+    }  	
 ]
