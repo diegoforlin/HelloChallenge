@@ -1,23 +1,41 @@
 package com.challengescrd.challenge.controller;
 
-import com.challengescrd.challenge.register.registerData;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import org.springframework.data.annotation.Id;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.challengescrd.challenge.entities.User;
+import com.challengescrd.challenge.entities.UserRepository;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.util.List;
 
 @RestController
 @RequestMapping("users")
 public class UserController {
+
+    @Autowired
+    private UserRepository userRepository;
+
     @PostMapping
-    public void register(@RequestBody registerData data) {
-        System.out.println(data);
+    @Transactional
+    public void register(@RequestBody User user) {
+        userRepository.save(user);
+    }
+
+    @GetMapping
+    public List<User> listing() {
+        return userRepository.findAll();
+    }
+
+    @PutMapping
+    @Transactional
+    public void update(@RequestBody @Valid User user) {
+        userRepository.save(user);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void delete(@PathVariable Long id) {
+        userRepository.deleteById(id);
     }
 }
